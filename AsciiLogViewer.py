@@ -11,6 +11,7 @@ __author__ = 'LjGww'
 application_title = "Text Log Viewer"
 
 import sys
+import os
 from Tkinter import *
 import tkMessageBox
 import tkFileDialog
@@ -39,8 +40,10 @@ class Application(Frame):
 
     def viewFile(self):
         self.desc['text'] += sys.argv[1]
-
-
+        if os.path.isfile(sys.argv[1]):
+            f = open(sys.argv[1],"rt")
+            for line in f:
+                self.outT.insert(END,line)
 
     def createWidgets(self):
 		self.desc = Label(self,text='Viewing file: ')
