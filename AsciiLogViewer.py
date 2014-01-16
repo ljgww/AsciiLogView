@@ -30,18 +30,23 @@ class Application(Frame):
         self.pack(expand=1, fill=BOTH)
         self.createWidgets()
         if len(sys.argv)==1:
-            self.showNavigator()
+            self.showFileNavigator()
         if len(sys.argv)==2:
             # display file name
-            self.viewFile()
+            self.viewFile(sys.argv[1])
 
-    def showNavigator(self):
-        pass
+    def showFileNavigator(self):
+        fname = tkFileDialog.askopenfilename(title="Select file to view:",defaultextension=".*",initialfile="",parent=self.master)
+        if fname:
+            self.viewFile(fname)
+        else:
+            tkMessageBox.showinfo(application_title,"No file selected.")
+            self.master.destroy()
 
-    def viewFile(self):
-        self.desc['text'] += sys.argv[1]
-        if os.path.isfile(sys.argv[1]):
-            f = open(sys.argv[1],"rt")
+    def viewFile(self,fname):
+        self.desc['text'] += fname
+        if os.path.isfile(fname):
+            f = open(fname,"rt")
             for line in f:
                 self.outT.insert(END,line)
 
@@ -83,7 +88,7 @@ if __name__=="__main__":
         app = Application(master=root)
         app.mainloop()
         try:
-	        root.destroy()
+            root.destroy()
         except:
             pass
     else:
