@@ -7,6 +7,7 @@
     if file name is not provided, it shall show navigator
 
 '''
+
 __author__ = 'LjGww'
 application_title = "Text Log Viewer"
 
@@ -16,8 +17,6 @@ from Tkinter import *
 import tkMessageBox
 import tkFileDialog
 
-def ShowNavigator():
-    return ""
 
 ################################################################
 #  Main window
