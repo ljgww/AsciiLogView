@@ -50,29 +50,42 @@ class Application(Frame):
                 self.outT.insert(END,line)
 
     def createWidgets(self):
-		self.desc = Label(self,text='Viewing file: ')
-		self.desc['anchor']="w"
-		self.desc['justify']="left"
-		self.desc.pack(side="top",fill=X)
+        self.desc = Label(self,text='Viewing file: ')
+        self.desc['anchor']="w"
+        self.desc['justify']="left"
+        self.desc.pack(side="top",fill=X)
 
-		self.OutFrame = Frame(self)
+        self.OutFrame = Frame(self)
 
-		self.outT = Text(master=self.OutFrame)
-		self.outT.pack(fill=BOTH, expand=1, side="left")
+        self.scrollbar1 = Scrollbar(master=self.OutFrame,orient=VERTICAL)
+        self.scrollbar1.pack(side="right", fill="y")
 
-		self.scrollbar1 = Scrollbar(master=self.OutFrame,orient=VERTICAL)
-		self.scrollbar1.pack(side="right", fill="y")
+        self.scrollbar2 = Scrollbar(master=self.OutFrame,orient=HORIZONTAL)
+        self.scrollbar2.pack(side="bottom", fill="x")
 
-		self.outT["yscrollcommand"] = self.scrollbar1.set
-		self.scrollbar1["command"]=self.outT.yview
+        self.outT = Text(master=self.OutFrame)
+        self.outT.pack(fill=BOTH, expand=1, side="left")
 
-		self.OutFrame.pack(expand=1, fill=BOTH)
+        self.outT["yscrollcommand"] = self.scrollbar1.set
+        self.scrollbar1["command"]=self.outT.yview
+        self.outT["xscrollcommand"] = self.scrollbar2.set
+        self.scrollbar1["command"]=self.outT.xview
 
-		self.doClose = Button(self)
-		self.doClose["text"] = "Close"
-		self.doClose["command"] = self.master.destroy
-		# self.doClose.pack({"side": "left"})
-		self.doClose.pack(fill=X)
+        self.OutFrame.pack(expand=1, fill=BOTH)
+
+        self.doClose = Button(self)
+        self.doClose["text"] = "Close"
+        self.doClose["command"] = self.master.destroy
+        # self.doClose.pack({"side": "left"})
+        self.doClose.pack(fill=X)
+
+        # allow some bottom space for OSX window resize to have handle, in the same time make some status info
+        self.status_line = Label(self,text='Status: ')
+        self.status_line['anchor']="w"
+        self.status_line['justify']="left"
+        self.status_line.pack(fill=X)
+
+
 
 
 ################################################################
