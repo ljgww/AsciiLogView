@@ -22,7 +22,7 @@ Since it is written in Python you need Python with TK installed for your platfor
 If you are testing it yourself, I will be glad to hear your experience.
 
 
-## Executable
+## Executables/Binaries
 
 It is possible to make executable from this source.
 
