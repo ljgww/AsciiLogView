@@ -43,17 +43,20 @@ class Application(Frame):
             self.master.destroy()
 
     def viewFile(self,fname):
-        self.desc['text'] += fname
+        self.status_line['text'] += fname
         if os.path.isfile(fname):
             f = open(fname,"rt")
             for line in f:
                 self.outT.insert(END,line)
 
     def createWidgets(self):
+        # intention to replace with find box
+        '''
         self.desc = Label(self,text='Viewing file: ')
         self.desc['anchor']="w"
         self.desc['justify']="left"
         self.desc.pack(side="top",fill=X)
+        '''
 
         self.OutFrame = Frame(self)
 
@@ -63,13 +66,14 @@ class Application(Frame):
         self.scrollbar2 = Scrollbar(master=self.OutFrame,orient=HORIZONTAL)
         self.scrollbar2.pack(side="bottom", fill="x")
 
-        self.outT = Text(master=self.OutFrame)
+        self.outT = Text(master=self.OutFrame,wrap=NONE)
         self.outT.pack(fill=BOTH, expand=1, side="left")
 
         self.outT["yscrollcommand"] = self.scrollbar1.set
         self.scrollbar1["command"]=self.outT.yview
+
         self.outT["xscrollcommand"] = self.scrollbar2.set
-        self.scrollbar1["command"]=self.outT.xview
+        self.scrollbar2["command"]=self.outT.xview
 
         self.OutFrame.pack(expand=1, fill=BOTH)
 
@@ -80,7 +84,7 @@ class Application(Frame):
         self.doClose.pack(fill=X)
 
         # allow some bottom space for OSX window resize to have handle, in the same time make some status info
-        self.status_line = Label(self,text='Status: ')
+        self.status_line = Label(self,text='Viewing file: ')
         self.status_line['anchor']="w"
         self.status_line['justify']="left"
         self.status_line.pack(fill=X)
