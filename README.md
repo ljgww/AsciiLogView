@@ -1,6 +1,6 @@
 #Ascii Log View
 
-Text file viewer written in Python and TK.
+Text file viewer written in Python and TK. (Intended for python 2.7.x)
 
 Primary idea is to demonstrate use of TK in Python, using various widgets.
 
