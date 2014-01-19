@@ -219,3 +219,8 @@ pip-log.txt
 
 #npp
 nppBackup/
+
+#git
+.gitignore
+.gitattributes
+
